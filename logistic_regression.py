@@ -28,3 +28,4 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
 
     y_pred = model.predict(x_test).astype(int)
     return y_pred
+#end of code
