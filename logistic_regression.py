@@ -16,27 +16,36 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     '''
     # Your code here
     x_train = np.asarray(x_train, dtype=float)
-    y_train = np.asarray(y_train, dtype=float)
+    y_train = np.asarray(y_train, dtype=float).reshape(-1)
     x_test = np.asarray(x_test, dtype=float)
 
-    n = x_train.shape[0]
-    X = np.hstack([np.ones((n, 1)), x_train])
-    Xt = np.hstack([np.ones((x_test.shape[0], 1)), x_test])
+    mu = x_train.mean(axis=0)
+    sigma = x_train.std(axis=0)
+    sigma[sigma == 0] = 1.0
 
-    w = np.zeros(X.shape[1])
+    x_train_s = (x_train - mu) / sigma
+    x_test_s = (x_test - mu) / sigma
 
-    lr = 0.1
-    iterations = 5000
+    n = x_train_s.shape[0]
+    X = np.hstack([np.ones((n, 1)), x_train_s])
+    Xt = np.hstack([np.ones((x_test_s.shape[0], 1)), x_test_s])
+
+    w = np.zeros(X.shape[1], dtype=float)
+
+    lr = 0.2
+    iterations = 20000
+    l2 = 0.01
 
     for _ in range(iterations):
         z = X @ w
-        z = np.clip(z, -500, 500)
-        p = 1 / (1 + np.exp(-z))
+        z = np.clip(z, -50, 50)
+        p = 1.0 / (1.0 + np.exp(-z))
+
         grad = (X.T @ (p - y_train)) / n
-        w -= lr * grad
+        reg = l2 * np.r_[0.0, w[1:]] / n
+        w -= lr * (grad + reg)
 
     zt = Xt @ w
-    zt = np.clip(zt, -500, 500)
-    pt = 1 / (1 + np.exp(-zt))
-
+    zt = np.clip(zt, -50, 50)
+    pt = 1.0 / (1.0 + np.exp(-zt))
     return (pt >= 0.5).astype(int)
