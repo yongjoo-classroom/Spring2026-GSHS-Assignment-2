@@ -37,7 +37,7 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     x_train = np.c_[np.ones(x_train.shape[0]), x_train]
     x_test = np.c_[np.ones(x_test.shape[0]), x_test]
 
-    optimal_w = grad_descent(x_train, y_train, lr= 0.1, epochs= 1000, lambda_reg= 0.01)
+    optimal_w = grad_descent(x_train, y_train, lr= 0.1, epochs= 10000, lambda_reg= 0.01)
 
     z_test = np.dot(x_test, optimal_w)
     y_pred = (sigmoid(z_test) >= 0.5).astype(int)
