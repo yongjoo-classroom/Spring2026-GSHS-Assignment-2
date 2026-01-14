@@ -1,5 +1,5 @@
 import numpy as np
-
+from sklearn.linear_model import LogisticRegression
 def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray) -> np.ndarray:
     '''
     Implements the logistic regression algorithm.
@@ -16,3 +16,6 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     '''
     # Your code here
     pass
+    model = LogisticRegression()
+    model.fit(x_train, y_train)
+    return model.predict(x_test)
