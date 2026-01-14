@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 
 def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray) -> np.ndarray:
     '''
@@ -14,5 +15,7 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     Returns:
         y_pred: Predicted labels for the test set
     '''
-    # Your code here
-    pass
+    model = LogisticRegression()
+    model.fit(x_train, y_train)
+    y_pred = model.predict(x_test)
+    return y_pred
