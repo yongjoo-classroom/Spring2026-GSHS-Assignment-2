@@ -7,7 +7,7 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     Parameters:
         - x_train: Training features of shape (n_samples, 2).
                     For this assignment, each training sample has two features: [feature1, feature2]
-        - y_train: Training labels (0/1)
+        - y_train: Training labels (0/1) 
                     All the predictions will be binary (0 or 1), since it is Logistic Regression.
         - x_test: Test features of shape (n_samples, 2).
 
