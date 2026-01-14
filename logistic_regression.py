@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray) -> np.ndarray:
     '''
@@ -16,27 +17,37 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
     '''
     # Your code here
     lr = 0.1
-    num_iter = 1000  
+    epochs = 5000
 
-    n_samples, n_features = x_train.shape
+    X = np.array(x_train, dtype=float)
+    y = np.array(y_train, dtype=float)
+    X_test = np.array(x_test, dtype=float)
+
+    mean = X.mean(axis=0)
+    std = X.std(axis=0) + 1e-8
+    X = (X - mean) / std
+    X_test = (X_test - mean) / std
+
+    n_samples, n_features = X.shape
+
+    # weight + bias
     w = np.zeros(n_features)
-    b = 0.0     
+    b = 0.0
+
     def sigmoid(z):
         return 1 / (1 + np.exp(-z))
-
-    for _ in range(num_iter):
-        linear_model = np.dot(x_train, w) + b
-        y_pred = sigmoid(linear_model)
-
-        dw = (1 / n_samples) * np.dot(x_train.T, (y_pred - y_train))
-        db = (1 / n_samples) * np.sum(y_pred - y_train)
+        
+    for _ in range(epochs):
+        z = np.dot(X, w) + b
+        y_pred = sigmoid(z)
+        
+        dw = np.dot(X.T, (y_pred - y)) / n_samples
+        db = np.sum(y_pred - y) / n_samples
 
         w -= lr * dw
         b -= lr * db
 
-    test_linear = np.dot(x_test, w) + b
-    y_test_pred_prob = sigmoid(test_linear)
+    z_test = np.dot(X_test, w) + b
+    y_test_pred = sigmoid(z_test)
 
-    y_pred = (y_test_pred_prob >= 0.5).astype(int)
-
-    return y_pred
+    return (y_test_pred >= 0.5).astype(int)
