@@ -14,7 +14,7 @@ Implement the `logistic_regression` function in `logistic_regression.py` to lear
 - `x_test`: A `numpy.ndarray` of shape `(num_test_values, 2)` where each row represents two features of a given data point. 
             The labels are to be predicted for these datapoints.
 
-### Output Format
+### Output Format        
 - Predicted labels for `x_test` as a `numpy.ndarray` of shape `len(x_test)`.
 
 ### Starter Code
