@@ -15,4 +15,11 @@ def logistic_regression(x_train: np.ndarray, y_train: np.ndarray, x_test: np.nda
         y_pred: Predicted labels for the test set
     '''
     # Your code here
-    pass
+    from sklearn.linear_model import LogisticRegression
+    x_train = np.asarray(x_train, dtype=float)
+    x_test = np.asarray(x_test, dtype=float)
+    y_train = np.asarray(y_train).ravel()
+    model = LogisticRegression(max_iter=1000)
+    model.fit(x_train, y_train)
+    y_pred = model.predict(x_test)
+    return y_pred
