@@ -8,7 +8,7 @@ from logistic_regression import logistic_regression
 
 def test_logistic_regression_1():
     '''
-    Test Case: 1: Toy Dataset     
+    Test Case: 1: Toy Dataset            
     Predict whether a customer will buy (1) or not buy (0)
     given their age and income level
     '''
