@@ -8,13 +8,13 @@ from logistic_regression import logistic_regression
 
 def test_logistic_regression_1():
     '''
-    Test Case: 1: Toy Dataset
+    Test Case: 1: Toy Dataset            
     Predict whether a customer will buy (1) or not buy (0)
     given their age and income level
     '''
     # X = [age, income_level]
     X = np.array([ [18, 1], [22, 1], [25, 2], [28, 2], [30, 3],
-      [35, 3], [40, 3], [45, 2], [50, 2], [55, 1] ])
+      [35, 3], [40, 3], [45, 2], [50, 2], [55, 1] ])      
 
     # y = buy (1) or not buy (0) 
     y = np.array([ 0, 0, 0, 1, 1, 1, 1, 1, 0, 0 ])
